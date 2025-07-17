@@ -1,6 +1,9 @@
 package com.corrus.crm_service.Entity;
 
-@Entity
-public class Vehicle {
+import jakarta.persistence.Entity;
+import lombok.Data;
 
+@Entity
+@Data
+public class Vehicle {
 }
