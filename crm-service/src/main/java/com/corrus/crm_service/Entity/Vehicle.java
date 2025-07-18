@@ -1,4 +1,4 @@
-package com.corrus.crm_service.Entity;
+package com.corrus.crm_service.entity;
 
 import java.math.BigDecimal;
 

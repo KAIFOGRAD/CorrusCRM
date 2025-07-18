@@ -1,4 +1,4 @@
-package com.corrus.crm_service.DTO;
+package com.corrus.crm_service.dto;
 
 import java.math.BigDecimal;
 

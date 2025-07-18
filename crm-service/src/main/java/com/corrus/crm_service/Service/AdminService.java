@@ -1,45 +1,48 @@
-package com.corrus.crm_service.Service;
+package com.corrus.crm_service.service;
 
-import java.math.BigDecimal;
-import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import com.corrus.crm_service.DTO.VehicleDTO;
-import com.corrus.crm_service.Entity.Vehicle;
-import com.corrus.crm_service.Repository.VehicleRepository;
+import com.corrus.crm_service.dto.VehicleDTO;
+import com.corrus.crm_service.entity.Vehicle;
+import com.corrus.crm_service.repository.VehicleRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class AdminService {
     private final VehicleRepository vehicleRepository;
+    private final ModelMapper mapper;
 
-    public Vehicle createVehicle(VehicleDTO vehicleCreateDTO)
+    public VehicleDTO createVehicle(VehicleDTO vehicleCreateDTO)
     {
-        Vehicle vehicle = new Vehicle();
-        BeanUtils.copyProperties(vehicleCreateDTO, vehicle);
-        return vehicleRepository.save(vehicle);
+        Vehicle vehicle = mapper.map(vehicleCreateDTO, Vehicle.class);
+        Vehicle savedVehicle = vehicleRepository.save(vehicle);
+        return mapper.map(savedVehicle,VehicleDTO.class);
     }
 
-    public void updateVehicle(long id, VehicleDTO vehicleCreateDTO)
+    public VehicleDTO updateVehicle(long id, VehicleDTO vehicleCreateDTO)
     {
         Vehicle vehicle = vehicleRepository.findById(id)
         .orElseThrow(()-> new EntityNotFoundException("Vehicle not found"));
         
-        BeanUtils.copyProperties(vehicleCreateDTO, vehicle);
-        vehicleRepository.save(vehicle);
+        Vehicle savedVehicle = vehicleRepository.save(vehicle);
+        return mapper.map(savedVehicle, VehicleDTO.class); 
         
     }
 
-    public void deleteVehicle(long id)
+    public VehicleDTO deleteVehicle(long id)
     {
         Vehicle vehicle = vehicleRepository.findById(id)
             .orElseThrow(()-> new EntityNotFoundException("Vehicle not found"));
         
+        VehicleDTO deletedVehicle = mapper.map(vehicle,VehicleDTO.class);
         vehicleRepository.delete(vehicle);
+        return deletedVehicle;
     }
     
 

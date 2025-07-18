@@ -1,12 +1,13 @@
-package com.corrus.crm_service.Service;
+package com.corrus.crm_service.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.corrus.crm_service.Entity.Vehicle;
-import com.corrus.crm_service.Repository.VehicleRepository;
+import com.corrus.crm_service.entity.Vehicle;
+import com.corrus.crm_service.repository.VehicleRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -17,6 +18,13 @@ public class UserService {
 
     public List<Vehicle> getAllVehicle()
     {
-        return vehicleRepository.findAll();
+       List<Vehicle> allVehicle = vehicleRepository.findAll();
+
+       if (allVehicle.isEmpty())
+       {
+        throw new EntityNotFoundException("No vehicles found");
+       }
+
+       return allVehicle;
     }
 }
