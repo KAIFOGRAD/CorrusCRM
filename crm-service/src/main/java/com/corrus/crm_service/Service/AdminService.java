@@ -28,7 +28,7 @@ public class AdminService {
     {
         Vehicle vehicle = vehicleRepository.findById(id)
         .orElseThrow(()-> new EntityNotFoundException("Vehicle not found"));
-        
+        mapper.map(vehicleCreateDTO,vehicle);
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
         return mapper.map(savedVehicle, VehicleDTO.class); 
         
