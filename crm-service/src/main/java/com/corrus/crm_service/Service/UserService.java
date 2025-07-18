@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserService {
         
-    private VehicleRepository vehicleRepository;
+    private final VehicleRepository vehicleRepository;
 
     public List<Vehicle> getAllVehicle()
     {
