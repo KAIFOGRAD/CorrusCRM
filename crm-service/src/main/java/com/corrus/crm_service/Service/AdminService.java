@@ -2,7 +2,6 @@ package com.corrus.crm_service.service;
 
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.corrus.crm_service.dto.VehicleDTO;
