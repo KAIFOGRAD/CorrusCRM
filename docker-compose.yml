@@ -8,10 +8,11 @@ services:
       POSTGRES_USER: corrus
       POSTGRES_PASSWORD: corrus
       POSTGRES_DB: crm_db
+      PGDATA: /var/lib/postgresql/data/crm_datas
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - crm_postgres_data:/var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4
@@ -25,4 +26,4 @@ services:
       - postgres
 
 volumes:
-  postgres_data:
+  crm_postgres_data:
